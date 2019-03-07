@@ -46,10 +46,12 @@ function getData($url, $xpath_str, $type = 'textContent')
                 //One child
                 $retUrndata[$k] = trim($query->item(0)->$type);
             } else {
-                //Arrray
+                //Array items
                 foreach ($query as $item) {
                     //var_dump($item).exit;
                     $retUrndata[$k][] = trim($item->$type);
+                    //prefix _html - full innerhtml
+                    $retUrndata[$k.'_html'][] = trim($doc->saveHTML($item));
                 }
 
             }
